@@ -109,7 +109,12 @@ impl Paddle {
     }
 
     fn draw(&self, d: &mut RaylibDrawHandle) {
-        d.draw_rectangle(self.x, self.y,self.width, self.height, self.color);
+        d.draw_rectangle_rounded(
+            Rectangle{x: self.x as f32, y: self.y as f32, width: self.width as f32, height: self.height as f32}, 
+            0.8, 
+            0, 
+            self.color
+        );
     }
 }
 
@@ -185,7 +190,8 @@ fn main() {
         // Draws
         d.clear_background(Color::BLACK.alpha(0.5));
         d.draw_line(WIDTH / 2 as i32, 0, WIDTH / 2 as i32, HEIGHT, Color::WHITE);
-        d.draw_rectangle(WIDTH/2 as i32, 0, WIDTH/2, HEIGHT, Color::BLUEVIOLET);
+        d.draw_rectangle(WIDTH/2 as i32, 0, WIDTH/2, HEIGHT, Color::BLACK.alpha(0.2));
+        d.draw_circle(WIDTH/2 as i32, HEIGHT/2 as i32, 50.0, Color::GREEN.alpha(0.1));
         ball.draw(&mut d);
         player_paddle.draw(&mut d);
         cpu_paddle.draw(&mut d);
